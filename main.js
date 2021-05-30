@@ -1,34 +1,59 @@
 // I. Preliminaries
   // I.A. Declare a variable for the user's move
-  let userMove = "";
+  let playerSelection = "";
+  
   // I.B. Declare a variable for the computer's move
-  let computerMove = "";
+  let computerSelection = "";
+  
   // I.C. Declare a variable for the winner
-  let winner = "";
+  let roundWinner = "";
+  
   // I.D. Initialize the capitalize function with one parameter
-  function capitalize(x) {
+  function capitalize(string1) {
     // I.D.1. Slice the first character of parameter and assign to firstChar
-    firstChar = x.slice(0,1);
+    let firstChar = string1.slice(0,1);
     // I.D.2. Set that firstChar to upper case
     firstChar = firstChar.toUpperCase();
     // I.D.3. Set parameter to lower case, and update parameter
-    x = x.toLowerCase();
+    string1 = string1.toLowerCase();
     // I.D.4. Update parameter to exclude first letter
-    x = x.substring(1);
+    string1 = string1.substring(1);
     // I.D.5. Concatenate the substring with firstChar
-    x = firstChar + x;    
+    string1 = firstChar + string1;    
     // I.D.6. Return the updated parameter
-    return x;
+    return string1;
+  }
+
+  // I.G. Welcome message
+  console.log("Welcome to Rock, Paper, Scissors!")
+
+// II. Get a move from the user
+
+  // Prompt user to make a move
+  console.log("Choose your move with the function rockPaperScissors")
+  function rockPaperScissors(string2) {
+    playerSelection = string2;
+    testMove(playerSelection);
+    return playerSelection;
   }
   
-// II. Get a move from the user
-  // Prompt user to make a move
-  // Assign user move to the variable
-  // Call a function to parse the variable, which will
-    // Call the capitalize function with argument user move
-    // If user move is Rock, Paper, or Scissors, return
-      // Else run error message, "That's not a move!" and return to prompt.
-  // Update user's move with string
+  // II.C. Initialize a function to test the variable
+  function testMove(move) {
+    // II.C.1. Call the capitalize function with argument
+    capitalizedMove = capitalize(move);
+    // II.C.2. If user move isn't Rock, Paper, or Scissors, run error message and prompt again
+    function checkMove(move) {
+      if (move !== ( "Rock" || "Paper" || "Scissor")) {
+        console.log("That's not a move!");
+        console.log("Please choose from Rock, Paper, and Scissors.");
+      }
+      return
+    }
+    checkMove(capitalizedMove);
+    // II.D. Update user's move with string
+    return playerSelection = capitalizedMove;
+  }
+
 
 // III. Have the computer make a random move
   // Call a function, which will generate a move:
@@ -39,6 +64,8 @@
   // Assign the string to the computer's move variable
 
 // IV. Determine the winner
+function playRound(userMove, computerMove) {
+  
   // IV.A. Call a function to determine the winner, using a swtich statement:
     // IV.A.1.1     If user has Rock and computer has Rock, assign neither to winner variable
     // IV.A.1.2.    If user has Rock and computer has Paper, assign computer to winner variable
@@ -49,7 +76,9 @@
     // IV.A.3.1.    If user has Scissors and computer has Rock, assign computer to winner variable
     // IV.A.3.2.    If user has Scissors and computer has Paper, assign user to winner variable
     // IV.A.3.3.    If user has Scissors and computer has Scissors, assign user to winner variable
-  // IV.B. Return
+  // IV.B. Return winner
+}
+// playRound(playerSelection, computerSelection);
 
 // V. Announce a winner
   // V.A.1. If winner variable is user
