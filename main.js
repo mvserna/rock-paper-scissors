@@ -109,11 +109,8 @@
     testMove(userMove);
     computerMove = randomMove();
     playRound(userMove, computerMove);
-    
-    
-    return roundWinner;
-
-
+    announceWinner(roundWinner)
+    return;
   }
 
   // II.C. Prompt user to make a move
@@ -122,11 +119,22 @@
 
 
 
-// V. Announce a winner
+// V. Initialize function to announce a winner
+function announceWinner(winner) {
   // V.A.1. If winner variable is user
+  if ( winner === "User" ) {
     // V.A.2. Log "You win! " + user move + " beats " + computer move.
+    console.log( "You win! " + userMove + " beats " + computerMove + "." );
+  } 
   // V.B.1. If winner variable is computer
+  else if ( winner === "Computer" ) {
     // V.B.2.  Log "You lose! " + computer move + " beats " + user move.
+    console.log( "You lose! " + computerMove + " beats " + userMove + "." )
+  }
   // V.C.1. If winner variable is neither
+  else {
     // V.C.2. Log "You tie with " + user move + " and " + computer move. "Let's play again..."
-  
+    console.log( "We tie! " + userMove + " ties " + computerMove + ". Let's try again!" )
+  }
+  return;
+}
