@@ -46,76 +46,80 @@
     return userMove = capitalizedMove;
   }
 
-  // II.B. Initialize a function to parse user's move
+  // II.B. Initialize a function to initiate round
   function rockPaperScissors(string2) {
+   
+    // III. Initialize a function, which will generate a move for the computer:
+    function randomMove() {
+      // III.A. Assign a random number to the computer move variable
+      computerMove = Math.random();
+        // If the variable is between 0 and 0.33, return Rock
+        if ( computerMove >= 0 && computerMove < 0.33) {
+          computerMove = "Rock";
+        }
+        // Else If the variable is between 0.33 and 0.66, return Paper
+        else if ( computerMove >= 0.33 && computerMove <= 0.66 ) {
+          computerMove = "Paper";
+        }
+        // Else the variable is greater than 0.66, return Scissors
+        else {
+          computerMove = "Scissors";
+        }
+      // III.B.
+      return computerMove;
+    }
+    
+    // IV. Initialize a function to determine the winner of one round
+    function playRound(playerSelection, computerSelection) {
+      // IV.A. Using a swtich statement determine winner:
+      switch(true) {
+        // IV.B.1.1     If user has Rock and computer has Rock, assign neither to winner variable
+        case ( playerSelection === "Rock" && computerSelection === "Rock") : roundWinner = "Neither";
+        break;
+        // IV.B.1.2.    If user has Rock and computer has Paper, assign computer to winner variable
+        case ( playerSelection === "Rock" && computerSelection === "Paper") : roundWinner = "Computer";
+        break;
+        // IV.B.1.3.    If user has Rock and computer has Scissors, assign user to winner variable
+        case ( playerSelection === "Rock" && computerSelection === "Scissors") : roundWinner = "User";
+        break;
+        // IV.B.2.1.    If user has Paper and computer has Rock, assign user to winner variable
+        case ( playerSelection === "Paper" && computerSelection === "Rock") : roundWinner = "User";
+        break;
+        // IV.B.2.2.    If user has Paper and computer has Paper, assign neither to winner variable
+        case ( playerSelection === "Paper" && computerSelection === "Paper") : roundWinner = "Neither";
+        break;
+        // IV.B.2.3.    If user has Paper and computer has Scissors, assign computer to winner variable
+        case ( playerSelection === "Paper" && computerSelection === "Scissors") : roundWinner = "Computer";
+        break;
+        // IV.B.3.1.    If user has Scissors and computer has Rock, assign computer to winner variable
+        case ( playerSelection === "Scissors" && computerSelection === "Rock") : roundWinner = "Computer";
+        break;
+        // IV.B.3.2.    If user has Scissors and computer has Paper, assign user to winner variable
+        case ( playerSelection === "Scissors" && computerSelection === "Paper") : roundWinner = "User";
+        break;
+        // IV.B.3.3.    If user has Scissors and computer has Scissors, assign user to winner variable
+        case ( playerSelection === "Scissors" && computerSelection === "Scissors") : roundWinner = "Neither";
+        break;
+      }
+      // IV.C. Return winner
+      return roundWinner;
+    }
+
     userMove = string2;
     testMove(userMove);
-    return userMove;
+    computerMove = randomMove();
+    playRound(userMove, computerMove);
+    
+    
+    return roundWinner;
+
+
   }
 
   // II.C. Prompt user to make a move
   console.log("Choose your move with the function rockPaperScissors")
 
 
-// III. Initialize a function, which will generate a move for the computer:
-function randomMove() {
-  // III.A. Assign a random number to the computer move variable
-  computerMove = Math.random();
-    // If the variable is between 0 and 0.33, return Rock
-    if ( computerMove >= 0 && computerMove < 0.33) {
-      computerMove = "Rock";
-    }
-    // Else If the variable is between 0.33 and 0.66, return Paper
-    else if ( computerMove >= 0.33 && computerMove <= 0.66 ) {
-      computerMove = "Paper";
-    }
-    // Else the variable is greater than 0.66, return Scissors
-    else {
-      computerMove = "Scissors";
-    }
-  // III.B.
-  return computerMove;
-}
-
-
-// IV. Determine the winner
-function playRound(playerSelection, computerSelection) {
-  // IV.A. Assign a move to the computer with randomMove
-  randomMove();
-  // IV.B. Call a function to determine the winner, using a swtich statement:
-  switch(true) {
-    // IV.B.1.1     If user has Rock and computer has Rock, assign neither to winner variable
-    case ( playerSelection === "Rock" && computerSelection === "Rock") : roundWinner = "Neither";
-    break;
-    // IV.B.1.2.    If user has Rock and computer has Paper, assign computer to winner variable
-    case ( playerSelection === "Rock" && computerSelection === "Paper") : roundWinner = "Computer";
-    break;
-    // IV.B.1.3.    If user has Rock and computer has Scissors, assign user to winner variable
-    case ( playerSelection === "Rock" && computerSelection === "Scissors") : roundWinner = "User";
-    break;
-    // IV.B.2.1.    If user has Paper and computer has Rock, assign user to winner variable
-    case ( playerSelection === "Paper" && computerSelection === "Rock") : roundWinner = "User";
-    break;
-    // IV.B.2.2.    If user has Paper and computer has Paper, assign neither to winner variable
-    case ( playerSelection === "Paper" && computerSelection === "Paper") : roundWinner = "Neither";
-    break;
-    // IV.B.2.3.    If user has Paper and computer has Scissors, assign computer to winner variable
-    case ( playerSelection === "Paper" && computerSelection === "Scissors") : roundWinner = "Computer";
-    break;
-    // IV.B.3.1.    If user has Scissors and computer has Rock, assign computer to winner variable
-    case ( playerSelection === "Scissors" && computerSelection === "Rock") : roundWinner = "Computer";
-    break;
-    // IV.B.3.2.    If user has Scissors and computer has Paper, assign user to winner variable
-    case ( playerSelection === "Scissors" && computerSelection === "Paper") : roundWinner = "User";
-    break;
-    // IV.B.3.3.    If user has Scissors and computer has Scissors, assign user to winner variable
-    case ( playerSelection === "Scissors" && computerSelection === "Scissors") : roundWinner = "Neither";
-    break;
-  }
-  // IV.C. Return winner
-  return roundWinner;
-}
-playRound(userMove, computerMove);
 
 
 // V. Announce a winner
