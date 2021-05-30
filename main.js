@@ -1,9 +1,9 @@
 // I. Preliminaries
   // I.A. Declare a variable for the user's move
-  let playerSelection = "";
+  let userMove = "";
   
   // I.B. Declare a variable for the computer's move
-  let computerSelection = "";
+  let computerMove = "";
   
   // I.C. Declare a variable for the winner
   let roundWinner = "";
@@ -32,9 +32,9 @@
   // Prompt user to make a move
   console.log("Choose your move with the function rockPaperScissors")
   function rockPaperScissors(string2) {
-    playerSelection = string2;
-    testMove(playerSelection);
-    return playerSelection;
+    userMove = string2;
+    testMove(userMove);
+    return userMove;
   }
   
   // II.C. Initialize a function to test the variable
@@ -50,8 +50,8 @@
       return
     }
     checkMove(capitalizedMove);
-    // II.D. Update user's move with string
-    return playerSelection = capitalizedMove;
+    // II.D. Update user's move with capitalized string
+    return userMove = capitalizedMove;
   }
 
 
@@ -64,21 +64,41 @@
   // Assign the string to the computer's move variable
 
 // IV. Determine the winner
-function playRound(userMove, computerMove) {
-  
+function playRound(playerSelection, computerSelection) {
   // IV.A. Call a function to determine the winner, using a swtich statement:
+  switch(true) {
     // IV.A.1.1     If user has Rock and computer has Rock, assign neither to winner variable
+    case ( playerSelection === "Rock" && computerSelection === "Rock") : roundWinner = "Neither";
+    break;
     // IV.A.1.2.    If user has Rock and computer has Paper, assign computer to winner variable
-    // IV.A.1.3.    If user has Rock and computer has Scissors, assign user to winner variable    
+    case ( playerSelection === "Rock" && computerSelection === "Paper") : roundWinner = "Computer";
+    break;
+    // IV.A.1.3.    If user has Rock and computer has Scissors, assign user to winner variable
+    case ( playerSelection === "Rock" && computerSelection === "Scissors") : roundWinner = "User";
+    break;
     // IV.B.2.1.    If user has Paper and computer has Rock, assign user to winner variable
+    case ( playerSelection === "Paper" && computerSelection === "Rock") : roundWinner = "User";
+    break;
     // IV.B.2.2.    If user has Paper and computer has Paper, assign neither to winner variable
+    case ( playerSelection === "Paper" && computerSelection === "Paper") : roundWinner = "Neither";
+    break;
     // IV.B.2.3.    If user has Paper and computer has Scissors, assign computer to winner variable
+    case ( playerSelection === "Paper" && computerSelection === "Scissors") : roundWinner = "Computer";
+    break;
     // IV.A.3.1.    If user has Scissors and computer has Rock, assign computer to winner variable
+    case ( playerSelection === "Scissors" && computerSelection === "Rock") : roundWinner = "Computer";
+    break;
     // IV.A.3.2.    If user has Scissors and computer has Paper, assign user to winner variable
+    case ( playerSelection === "Scissors" && computerSelection === "Paper") : roundWinner = "User";
+    break;
     // IV.A.3.3.    If user has Scissors and computer has Scissors, assign user to winner variable
+    case ( playerSelection === "Scissors" && computerSelection === "Scissors") : roundWinner = "Neither";
+    break;
+  }
   // IV.B. Return winner
+  return roundWinner;
 }
-// playRound(playerSelection, computerSelection);
+playRound(userMove, computerMove);
 
 // V. Announce a winner
   // V.A.1. If winner variable is user
