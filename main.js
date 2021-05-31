@@ -107,17 +107,19 @@ function announceWinner(winner) {
   // V.A.1. If winner variable is user
   if ( winner === "User" ) {
     // V.A.2. Log "You win! " + user move + " beats " + computer move.
-    console.log( "You win! " + userMove + " beats " + computerMove + "." );
+    console.log( "You win! Your " + userMove + " beats " + computerMove + "." );
+    alert( "You win! Your " + userMove + " beats " + computerMove + "." );
   } 
   // V.B.1. If winner variable is computer
   else if ( winner === "Computer" ) {
     // V.B.2.  Log "You lose! " + computer move + " beats " + user move.
-    console.log( "You lose! " + computerMove + " beats " + userMove + "." )
+    console.log( "You lose! " + computerMove + " beats your" + userMove + "." );
+    alert( "You lose! " + computerMove + " beats your" + userMove + "." );
   }
   // V.C.1. If winner variable is neither
   else if ( winner === "Neither" ) {
     // V.C.2. Log "You tie with " + user move + " and " + computer move. "Let's play again..."
-    console.log( "We tie! " + userMove + " ties " + computerMove + ". Let's play again!" )
+    console.log( "We tie! Your " + userMove + " ties " + computerMove + ". Let's play again!" )
   }
   // V.D. Else take no action
   return;
@@ -133,6 +135,27 @@ function rockPaperScissors(string2) {
   return;
 }
 
+// VII. Initialize function to begin a best-of-five game
+function game() {
+  let userWins = 0;
+  let computerWins = 0;
+  let neitherWins = 0;
+  while ( userWins < 3 && computerWins < 3 ) {
+    userMove = prompt("Rock...\n Paper...\n  Scissors...\n   Shoot\:");
+    rockPaperScissors(userMove);
+    if (roundWinner === "User") {
+      userWins++;
+    } else if (roundWinner === "Computer") {
+      computerWins++;
+    } else if (roundWinner === "Neither") {
+      neitherWins++;
+    }
+    
+    console.log( "You have " + userWins + " wins, and " + computerWins + " losses. You have tied " + neitherWins + " times." );
+  }
+  return;
+}
+
 // VII. Prompt user to make a move
 console.log( "Choose your move with the function rockPaperScissors" );
-console.log( "Or, we can play a best-of-five with the function 'game()' " );
+console.log( "Or, with the command 'game()' we can play a best-of-five game, if you dare!" );
