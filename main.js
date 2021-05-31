@@ -134,4 +134,5 @@ function rockPaperScissors(string2) {
 }
 
 // VII. Prompt user to make a move
-console.log("Choose your move with the function rockPaperScissors")
+console.log( "Choose your move with the function rockPaperScissors" );
+console.log( "Or, we can play a best-of-five with the function 'game()' " );
