@@ -33,7 +33,6 @@ function testMove(move) {
       // II.A.2 Then run error message and prompt again
       console.log("That's not a move!\nPlease choose from Rock, Paper, and Scissors.");
       alert("That's not a move!\nPlease choose from Rock, Paper, and Scissors.");
-      game();
     }
     // II.A.3 Take no action
     return
@@ -139,10 +138,10 @@ function rockPaperScissors(string2) {
 
 // VII. Initialize function to begin a best-of-five game
 function game() {
-  let userWins = 0;
-  let computerWins = 0;
-  let neitherWins = 0;
-  let userRecord = 'userWins + "-" + computerWins + "-" + neitherWins';
+  let userWins = "0";
+  let computerWins = "0";
+  let neitherWins = "0";
+  let userRecord = (userWins + "-" + computerWins + "-" + neitherWins + ".");
   while ( userWins < 3 && computerWins < 3 ) {
     userMove = prompt("Rock...\n Paper...\n  Scissors...\n   Shoot\:");
     rockPaperScissors(userMove);
@@ -155,6 +154,7 @@ function game() {
     }
     console.log( "You have " + userWins + " wins, and " + computerWins + " losses. You have tied " + neitherWins + " times." );
     alert( "You have " + userWins + " wins, and " + computerWins + " losses. You have tied " + neitherWins + " times.\nPress OK for the next round.");
+    userRecord = (userWins + "-" + computerWins + "-" + neitherWins + ".");
   }
   if (userWins === 3) {
     alert( "Congratulations! You have won this best-of-five game with a record of " + userRecord )
