@@ -31,8 +31,9 @@ function testMove(move) {
     // II.A.1. If user move isn't Rock, Paper, or Scissors
     if ( !(move === "Rock" || move === "Paper" || move === "Scissors") ) {
       // II.A.2 Then run error message and prompt again
-      console.log("That's not a move!");
-      console.log("Please choose from Rock, Paper, and Scissors.");
+      console.log("That's not a move!\nPlease choose from Rock, Paper, and Scissors.");
+      alert("That's not a move!\nPlease choose from Rock, Paper, and Scissors.");
+      game();
     }
     // II.A.3 Take no action
     return
