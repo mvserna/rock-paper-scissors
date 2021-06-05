@@ -2,6 +2,7 @@
   let userMove = "";
   let computerMove = "";
   let roundWinner = "";
+  let messageDiv = document.getElementById('message');
   function capitalize(string1) {
     let firstChar = string1.slice(0,1);
     firstChar = firstChar.toUpperCase();
@@ -19,7 +20,7 @@ function testMove(move) {
   function checkMove(move) {
     if ( !(move === "Rock" || move === "Paper" || move === "Scissors") ) {
       console.log("That's not a move!\nPlease choose from Rock, Paper, and Scissors.");
-      alert("That's not a move!\nPlease choose from Rock, Paper, and Scissors.");
+      messageDiv.innerText = "That's not a move!\nPlease choose from Rock, Paper, and Scissors.";
     }
     return
   }
@@ -73,15 +74,15 @@ function playRound(playerSelection, computerSelection) {
 function announceWinner(winner) {
   if ( winner === "User" ) {
     console.log( "You win! Your " + userMove + " beats " + computerMove + "." );
-    alert( "You win! Your " + userMove + " beats " + computerMove + "." );
+    messageDiv.innerText = "You win! Your " + userMove + " beats " + computerMove + "." ;
   } 
   else if ( winner === "Computer" ) {
     console.log( "You lose! " + computerMove + " beats your " + userMove + "." );
-    alert( "You lose! " + computerMove + " beats your " + userMove + "." );
+    messageDiv.innerText = "You lose! " + computerMove + " beats your " + userMove + "." ;
   }
   else if ( winner === "Neither" ) {
-    console.log( "We tie! Your " + userMove + " ties " + computerMove + ". Let's play again!" );
-    alert( "We tie! Your " + userMove + " ties " + computerMove + ". Let's play again!" );
+    console.log( "We tie! We both played " + userMove + ". Let's play again!" );
+    messageDiv.innerText = "We tie! We both played " + userMove + ". Let's play again!" ;
   }
   return;
 }
@@ -126,13 +127,15 @@ function game() {
 
 // VII. Prompt user to make a move
 console.log( "Choose your move with the function rockPaperScissors" );
+messageDiv.innerText = 'Choose your move with the buttons above'
 console.log( "Or, with the command 'game()' we can play a best-of-five game, if you dare!" );
 
+
 // VIII. Add event listeners to buttons
-let rockButton = document.getElementById('button-rock');
+let rockButton = document.getElementById('btn-rock');
 rockButton.addEventListener( 'click', () => rockPaperScissors('rock') );
-let paperButton = document.getElementById('button-paper');
+let paperButton = document.getElementById('btn-paper');
 paperButton.addEventListener( 'click', () => rockPaperScissors('paper') );
-let scissorsButton = document.getElementById('button-scissors');
+let scissorsButton = document.getElementById('btn-scissors');
 scissorsButton.addEventListener( 'click', () => rockPaperScissors('scissors') );
 
