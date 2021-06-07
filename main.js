@@ -2,33 +2,31 @@
   let userMove = "";
   let computerMove = "";
   let roundWinner = "";
-  let messageDiv = document.getElementById('message');
-  function capitalize(string1) {
-    let firstChar = string1.slice(0,1);
-    firstChar = firstChar.toUpperCase();
-    string1 = string1.toLowerCase();
-    string1 = string1.substring(1);
-    string1 = firstChar + string1;    
-    return string1;
-  }
-  console.log("Welcome to Rock, Paper, Scissors!")
-
-
-// II. Initialize a function to test if user's move is permitted
-function testMove(move) {
+  let resultsDiv = document.getElementById('results-message');
+  let roundResults = document.getElementById('round-results');
+  let gameResults = document.getElementById('game-results');
+  let userWins = "0";
+  let computerWins = "0";
+  let neitherWins = "0";
+  let userRecord = (userWins + "-" + computerWins + "-" + neitherWins + ".");
   
-  function checkMove(move) {
-    if ( !(move === "Rock" || move === "Paper" || move === "Scissors") ) {
-      console.log("That's not a move!\nPlease choose from Rock, Paper, and Scissors.");
-      messageDiv.innerText = "That's not a move!\nPlease choose from Rock, Paper, and Scissors.";
-    }
-    return
+  function write(string3) {
+    let text = document.createTextNode(string3);
+    let h4 = document.createElement('h4');
+    h4.appendChild(text);
+    return h4;
   }
 
-  capitalizedMove = capitalize(move);
-  checkMove(capitalizedMove);
-  return userMove = capitalizedMove;
-}
+  function resetTally() {
+    if ( userWins === 5 || computerWins === 5 ) {
+    userWins = 0;
+    computerWins = 0;
+    neitherWins = 0;
+    gameResults.replaceChild(write(""), gameResults.childNodes[0]);
+    }
+    return;
+  }
+
 
 // III. Initialize a function, which will generate a move for the computer:
 function randomMove() {
@@ -71,71 +69,67 @@ function playRound(playerSelection, computerSelection) {
 }
 
 // V. Initialize function to announce a winner
-function announceWinner(winner) {
+function announceRoundWinner(winner) {
+  let win = "You win! Your " + userMove + " beats " + computerMove + "." ;
+  let lose = "You lose! " + computerMove + " beats your " + userMove + "." ;
+  let tie = "We tie! We both played " + userMove + ". Let's play again!" ;
+  
   if ( winner === "User" ) {
-    console.log( "You win! Your " + userMove + " beats " + computerMove + "." );
-    messageDiv.innerText = "You win! Your " + userMove + " beats " + computerMove + "." ;
+    roundResults.innerText = win;
   } 
   else if ( winner === "Computer" ) {
-    console.log( "You lose! " + computerMove + " beats your " + userMove + "." );
-    messageDiv.innerText = "You lose! " + computerMove + " beats your " + userMove + "." ;
+    roundResults.innerText = lose;
   }
   else if ( winner === "Neither" ) {
-    console.log( "We tie! We both played " + userMove + ". Let's play again!" );
-    messageDiv.innerText = "We tie! We both played " + userMove + ". Let's play again!" ;
+    roundResults.innerText = tie;
   }
+  return;
+}
+
+// Initialize a function to update the record of the series
+function updateGameRecord(winner) {
+    if (winner === "User") {
+      userWins++;
+    } else if (winner === "Computer") {
+      computerWins++;
+    } else if (winner === "Neither") {
+      neitherWins++;
+    }
+    let runningTally = write( `Your record is ${userWins}-${computerWins}-${neitherWins}. Make your next move.` )
+    gameResults.replaceChild(runningTally, gameResults.childNodes[0]);
+    userRecord = (userWins + "-" + computerWins + "-" + neitherWins + ".");
+  
+  if (userWins === 5) {
+    let gameWin = "Congratulations! You have won this game with a record of " + userRecord ;
+    gameResults.replaceChild( write(gameWin), gameResults.childNodes[0] );
+  } else if (computerWins === 5) {
+    let gameLose = "Oh no! You lost this game with a record of " + userRecord ;
+    gameResults.replaceChild( write(gameLose), gameResults.childNodes[0] );
+  }
+  
   return;
 }
 
 // VI. Initialize a function to initiate round combining above functions
 function rockPaperScissors(string2) {
+  resetTally();
   userMove = string2;
-  testMove(userMove);
   computerMove = randomMove();
   playRound(userMove, computerMove);
-  announceWinner(roundWinner)
+  announceRoundWinner(roundWinner)
+  updateGameRecord(roundWinner);
+
   return;
 }
 
-// VII. Initialize function to begin a best-of-five game
-function game() {
-  let userWins = "0";
-  let computerWins = "0";
-  let neitherWins = "0";
-  let userRecord = (userWins + "-" + computerWins + "-" + neitherWins + ".");
-  while ( userWins < 3 && computerWins < 3 ) {
-    userMove = prompt("Rock...\n Paper...\n  Scissors...\n   Shoot\:");
-    rockPaperScissors(userMove);
-    if (roundWinner === "User") {
-      userWins++;
-    } else if (roundWinner === "Computer") {
-      computerWins++;
-    } else if (roundWinner === "Neither") {
-      neitherWins++;
-    }
-    console.log( "You have " + userWins + " wins, and " + computerWins + " losses. You have tied " + neitherWins + " times." );
-    alert( "You have " + userWins + " wins, and " + computerWins + " losses. You have tied " + neitherWins + " times.\nPress OK for the next round.");
-    userRecord = (userWins + "-" + computerWins + "-" + neitherWins + ".");
-  }
-  if (userWins === 3) {
-    alert( "Congratulations! You have won this best-of-five game with a record of " + userRecord )
-  } else if (computerWins === 3) {
-    alert("Oh no! You lost this best-of-five game with a record of " + userRecord);
-  }
-  return;
-}
 
-// VII. Prompt user to make a move
-console.log( "Choose your move with the function rockPaperScissors" );
-messageDiv.innerText = 'Choose your move with the buttons above'
-console.log( "Or, with the command 'game()' we can play a best-of-five game, if you dare!" );
 
 
 // VIII. Add event listeners to buttons
 let rockButton = document.getElementById('btn-rock');
-rockButton.addEventListener( 'click', () => rockPaperScissors('rock') );
+rockButton.addEventListener( 'click', () => rockPaperScissors('Rock') );
 let paperButton = document.getElementById('btn-paper');
-paperButton.addEventListener( 'click', () => rockPaperScissors('paper') );
+paperButton.addEventListener( 'click', () => rockPaperScissors('Paper') );
 let scissorsButton = document.getElementById('btn-scissors');
-scissorsButton.addEventListener( 'click', () => rockPaperScissors('scissors') );
+scissorsButton.addEventListener( 'click', () => rockPaperScissors('Scissors') );
 
